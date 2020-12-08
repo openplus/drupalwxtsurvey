@@ -1,0 +1,103 @@
+{
+    "name": "drupal/lightning_workflow",
+    "type": "drupal-module",
+    "description": "Tools to improve your content workflow.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/autosave_form": "^1.2",
+        "drupal/conflict": "^2.0-alpha2",
+        "drupal/core": "^8.8.10 || ^9.0.6",
+        "drupal/diff": "^1.0",
+        "drupal/lightning_core": "3.* || 4.* || 5.*",
+        "drupal/moderation_dashboard": "^1.0",
+        "drupal/moderation_sidebar": "^1.2"
+    },
+    "require-dev": {
+        "composer/installers": "^1.9",
+        "drupal/core-composer-scaffold": "*",
+        "drupal/core-dev": "*",
+        "drupal/inline_entity_form": "^1.0",
+        "drush/drush": ">=9.7",
+        "vijaycs85/drupal-quality-checker": "^1.0"
+    },
+    "config": {
+        "preferred-install": {
+            "drupal/core": "dist"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-8.x-3.x": "3.x-dev"
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "docroot/"
+            },
+            "file-mapping": {
+                "[project-root]/.gitattributes": false,
+                "[project-root]/.editorconfig": false,
+                "[web-root]/example.gitignore": false,
+                "[web-root]/.csslintrc": false,
+                "[web-root]/modules/README.txt": false,
+                "[web-root]/profiles/README.txt": false,
+                "[web-root]/sites/README.txt": false,
+                "[web-root]/themes/README.txt": false,
+                "[web-root]/INSTALL.txt": false,
+                "[web-root]/robots.txt": false,
+                "[web-root]/web.config": false
+            }
+        },
+        "enable-patching": true,
+        "installer-paths": {
+            "docroot/core": [
+                "type:drupal-core"
+            ],
+            "docroot/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "docroot/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "docroot/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "docroot/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\Tests\\lightning_workflow\\": "tests/src"
+        },
+        "classmap": [
+            "tests/contexts"
+        ]
+    },
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-update-cmd": [
+            "@putenv DIR=./docroot/modules/lightning_workflow",
+            "mkdir -p $DIR",
+            "ln -s -f $PWD/config $DIR",
+            "ln -s -f $PWD/images $DIR",
+            "ln -s -f $PWD/modules $DIR",
+            "ln -s -f $PWD/src $DIR",
+            "ln -s -f $PWD/tests $DIR",
+            "find $PWD -name 'lightning_workflow.*' -depth 1 -exec ln -s -f {} $DIR ';'",
+            "cp -f phpunit.xml ./docroot/core"
+        ],
+        "nuke": "rm -r -f docroot vendor"
+    }
+}

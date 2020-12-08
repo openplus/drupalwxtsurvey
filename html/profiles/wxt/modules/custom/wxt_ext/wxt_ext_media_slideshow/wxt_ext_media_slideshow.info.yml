@@ -1,0 +1,11 @@
+name: 'WxT Extend Media Slideshow'
+description: 'Adds a slideshow media_entity bundle.'
+type: module
+core_version_requirement: '^8.8 || ^9'
+package: WxT
+
+# Required modules
+dependencies:
+  - field_formatter:field_formatter
+  - media_entity_slideshow:media_entity_slideshow
+  - wxt_ext_media:wxt_ext_media

@@ -1,0 +1,17 @@
+name: 'WxT Extend Migrate'
+description: 'Registers migration plugins and provides content.'
+type: module
+core_version_requirement: '^8.8 || ^9'
+package: WxT
+
+# Required modules
+dependencies:
+  - migrate:migrate
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools
+  - lightning_layout:lightning_layout
+  - page_manager:page_manager
+  - panelizer:panelizer
+  - panels_ipe:panels_ipe
+  - wxt_ext_media:wxt_ext_media
+  - wxt_ext_media_slideshow:wxt_ext_media_slideshow

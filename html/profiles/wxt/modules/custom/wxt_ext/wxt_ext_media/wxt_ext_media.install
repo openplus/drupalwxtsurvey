@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains wxt_ext_media.module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function wxt_ext_media_install() {
+  // Enable translation for our core entities/bundles.
+  $entities = [
+    'media' => [
+      'image',
+    ],
+  ];
+  wxt_translation_enable_translation($entities);
+
+  // Download the newest config translations from Drupal.org.
+  wxt_translation_update_config_translation();
+}

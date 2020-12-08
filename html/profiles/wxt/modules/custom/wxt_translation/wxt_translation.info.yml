@@ -1,0 +1,10 @@
+name: 'WxT Translation'
+description: 'Contains default configuration and additional functionality to interact with entity translation.'
+type: module
+core_version_requirement: '^8.8 || ^9'
+package: WxT
+
+# Required modules
+dependencies:
+  - drupal:config_translation
+  - drupal:content_translation

@@ -1,0 +1,10 @@
+name: 'WxT Extend Paragraph'
+description: 'Provides paragraph related configuration.'
+type: module
+package: WxT
+core_version_requirement: '^8.8.10 || ^9'
+
+# Required modules
+dependencies:
+  - paragraphs:paragraphs
+  - wxt_translation:wxt_translation

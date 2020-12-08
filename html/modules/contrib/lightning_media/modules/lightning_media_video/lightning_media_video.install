@@ -1,0 +1,124 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update routines for Lightning Media Video.
+ */
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\lightning_core\ConfigHelper as Config;
+use Drupal\media\Entity\MediaType;
+
+/**
+ * Removed in Lightning Media 4.0.
+ *
+ * Formerly installed video_embed_media and updated display settings for videos.
+ */
+function lightning_media_video_update_8001() {
+}
+
+/**
+ * Removed in Lightning Media 4.0.
+ *
+ * Formerly created the media_browser form display.
+ */
+function lightning_media_video_update_8002() {
+}
+
+/**
+ * Creates the thumbnail display for remote videos.
+ */
+function lightning_media_video_update_8003() {
+  // In Lightning Media 4, the video media type was renamed to remote_video.
+  // This update existed prior to Lightning Media 4, so we need to ensure that
+  // the thumbnail view display is created for the existing media type.
+  $view_display = EntityViewDisplay::load('media.video.thumbnail');
+
+  // Only create the view display if it hasn't been created already.
+  if (empty($view_display)) {
+    $media_type = MediaType::load('video');
+
+    // Adapt the view display we ship for the remote_video media type, so that
+    // it works with the video media type.
+    $values = Config::forModule('lightning_media_video')
+      ->optional()
+      ->read('core.entity_view_display.media.remote_video.thumbnail');
+
+    $values['bundle'] = $media_type->id();
+    unset($values['id'], $values['dependencies'], $values['hidden']['field_media_oembed_video']);
+
+    EntityViewDisplay::create($values)
+      ->removeComponent($media_type->getSource()->getSourceFieldDefinition($media_type)->getName())
+      ->save();
+  }
+}
+
+/**
+ * Creates the media_library form display for videos.
+ */
+function lightning_media_video_update_8004() {
+  $config = Config::forModule('lightning_media_video')->optional();
+
+  $type_map = [
+    'video' => ['remote_video', 'field_media_oembed_video'],
+    'video_file' => ['video', 'field_media_video_file'],
+  ];
+
+  $media_types = array_keys($type_map);
+  $media_types = MediaType::loadMultiple($media_types);
+
+  // In Lightning Media 4, the video media type was renamed to remote_video and
+  // the video_file media type was renamed to video. This update existed prior
+  // to Lightning Media 4, so we need to ensure that the media_library form
+  // display is created for the existing media types.
+  foreach ($media_types as $original_type => $media_type) {
+    $form_display = EntityFormDisplay::load("media.$original_type.media_library");
+
+    // Only create the form display if it hasn't been created already.
+    if (empty($form_display)) {
+      list ($new_type, $new_source_field) = $type_map[$original_type];
+
+      // Adapt the form display we ship for the destination media type, so that
+      // it works with the source media type.
+      $values = $config->read("core.entity_form_display.media.$new_type.media_library");
+      $values['bundle'] = $original_type;
+      unset($values['id'], $values['dependencies'], $values['hidden'][$new_source_field]);
+
+      EntityFormDisplay::create($values)
+        ->removeComponent($media_type->getSource()->getSourceFieldDefinition($media_type)->getName())
+        ->save();
+    }
+  }
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function lightning_media_video_requirements($phase) {
+  $requirements = [];
+
+  if ($phase === 'runtime' && Drupal::moduleHandler()->moduleExists('video_embed_media')) {
+    $requirements['lightning_media_deprecate_video_embed_media'] = [
+      'severity' => REQUIREMENT_WARNING,
+      'title' => t('Deprecated dependency: Video Embed Media'),
+      'description' => t('Lightning Media 5.0 will <strong>not</strong> include the Video Embed Media module. Please add it to your project directly: <code>composer require drupal/video_embed_field:^2.0</code>.'),
+    ];
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function lightning_media_video_update_dependencies() {
+  return [
+    'lightning_media_video' => [
+      // 8003 depends on the thumbnail view mode, which is created by
+      // lightning_media 8015.
+      8003 => [
+        'lightning_media' => 8015,
+      ],
+    ],
+  ];
+}

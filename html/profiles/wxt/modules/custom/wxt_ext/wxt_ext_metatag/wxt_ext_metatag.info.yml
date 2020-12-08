@@ -1,0 +1,12 @@
+name: 'WxT Extend Metatag'
+description: 'Enable(s) and configure the default metatag configuration.'
+type: module
+package: WxT
+core_version_requirement: '^8.8.10 || ^9'
+
+# Required modules
+dependencies:
+  - metatag:metatag
+  - metatag_dc:metatag_dc
+  - metatag_page_manager:metatag_page_manager
+  - metatag_views:metatag_views

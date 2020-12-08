@@ -1,0 +1,14 @@
+name: 'Landing page'
+package: Lightning
+core: 8.x
+core_version_requirement: '^8 || ^9'
+type: module
+description: 'Provides a content type which allows you to build free-form one-off landing pages.'
+dependencies:
+  - drupal:node
+  - lightning_layout:lightning_layout
+
+# Information added by Drupal.org packaging script on 2020-11-11
+version: '8.x-2.9'
+project: 'lightning_layout'
+datestamp: 1605114498
