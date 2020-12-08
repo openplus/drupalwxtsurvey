@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc65f2432a54ac014cb5cb1f04a507bf",
+    "content-hash": "8e1f1247d83e2add2948c6acc02c373a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1772,6 +1772,72 @@
             }
         },
         {
+            "name": "drupal/backup_migrate",
+            "version": "5.0.0-rc2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/backup_migrate.git",
+                "reference": "5.0.0-rc2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/backup_migrate-5.0.0-rc2.zip",
+                "reference": "5.0.0-rc2",
+                "shasum": "b8c4f5117d9455f4ca652e70135ddc2964fdceef"
+            },
+            "require": {
+                "drupal/core": "^8.7.7 || ^9"
+            },
+            "suggest": {
+                "defuse/php-encryption": "Optional encryption of saved backups."
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "5.0.0-rc2",
+                    "datestamp": "1601316516",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "See contributors",
+                    "homepage": "https://www.drupal.org/node/189065/committers",
+                    "role": "Developer"
+                },
+                {
+                    "name": "DamienMcKenna",
+                    "homepage": "https://www.drupal.org/user/108450"
+                },
+                {
+                    "name": "dgorton",
+                    "homepage": "https://www.drupal.org/user/19044"
+                },
+                {
+                    "name": "ikit-claw",
+                    "homepage": "https://www.drupal.org/user/3285813"
+                },
+                {
+                    "name": "ronan",
+                    "homepage": "https://www.drupal.org/user/72815"
+                }
+            ],
+            "description": "Backup and Migrate Drupal Module",
+            "homepage": "https://www.drupal.org/project/backup_migrate",
+            "support": {
+                "source": "https://git.drupalcode.org/project/backup_migrate",
+                "issues": "https://www.drupal.org/project/issues/backup_migrate",
+                "slack": "https://drupal.slack.com/messages/C7C4M4QJV/details/"
+            }
+        },
+        {
             "name": "drupal/bg_image_formatter",
             "version": "1.14.0",
             "source": {
@@ -2703,9 +2769,9 @@
                     }
                 },
                 "patches_applied": {
-                    "Enter drupal/core patch #2752443 description here": "https://www.drupal.org/files/issues/in_correct_order_and-2752443-1.patch",
                     "2869592 - Disabled update module shouldn't produce a status report warning": "https://www.drupal.org/files/issues/2869592-remove-update-warning-7.patch",
                     "2815221 - Add quickedit to the latest-revision route": "https://www.drupal.org/files/issues/2019-11-27/2815221-125.patch",
+                    "Enter drupal/core patch #2752443 description here": "https://www.drupal.org/files/issues/in_correct_order_and-2752443-1.patch",
                     "Enter drupal/core patch #1356276 description here": "https://www.drupal.org/files/issues/2020-03-24/1356276-531-9.0.x-9.patch",
                     "Enter drupal/core patch #2454915 description here": "https://www.drupal.org/files/issues/2020-08-27/w3c-entity-links-2454915-36.patch",
                     "Enter drupal/core patch #2846485 description here": "https://www.drupal.org/files/issues/2018-04-03/views-multivalue_field_rendering_performance-2846485-23.patch",
@@ -8305,8 +8371,7 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/webform_migrate",
                 "issues": "http://drupal.org/project/issues/webform_migrate"
-            },
-            "time": "2020-08-09T20:56:14+00:00"
+            }
         },
         {
             "name": "drupal/webform_node",
@@ -17196,7 +17261,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupalwxt/wxt": 20
+        "drupalwxt/wxt": 20,
+        "drupal/backup_migrate": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,

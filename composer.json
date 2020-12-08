@@ -10,7 +10,8 @@
         "drupal/core-composer-scaffold": "^9",
         "drupalwxt/wxt": "4.0.x-dev",
         "drush/drush": ">=9.7",
-        "oomphinc/composer-installers-extender": "^1.1 || ^2"
+        "oomphinc/composer-installers-extender": "^1.1 || ^2",
+        "drupal/backup_migrate": "^5.0@RC"
     },
     "require-dev": {
         "drupal/core-dev": "^9",
